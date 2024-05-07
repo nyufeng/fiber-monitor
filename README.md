@@ -2,6 +2,18 @@
 
 本项目析出自 [gofiber/v2/middleware/monitor](https://github.com/gofiber/fiber/tree/v2/middleware/monitor)
 
+`go get github.com/nyufeng/fiber-monitor/v2`
+```go
+...
+import (
+	"github.com/gofiber/fiber/v2"
+	"github.com/nyufeng/fiber-monitor/v2/monitor"
+)
+...
+app.Get("/metrics", monitor.New())
+
+```
+
 在测试中我发现 Monitor 显示的值与 htop 展示的值有出入，且长时间保持不变。通过对代码的分析，Monitor 显示当前程序的 CPU 占用采用的是自程序启动以来的平均值，并不是一个实时的动态值。
 
 我向项目提交了 [Issue](https://github.com/gofiber/fiber/issues/2978) 并推送了一个 [PR](https://github.com/gofiber/fiber/pull/2984)
